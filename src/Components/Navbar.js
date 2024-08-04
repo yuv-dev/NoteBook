@@ -29,15 +29,15 @@ function Navbar({ logo, handleSearchNote }) {
       <FaHome onClick={()=> navigate('/home')} />
         {iconClick && <Menu />}
       <div className="sign-box">
-        <button className="sign-button" onClick={handleSignUp}>
-          SignUp
-        </button>
-        <button className="sign-button" onClick={handleSignIn}>
-          SignIn
-        </button>
-        <button className="sign-button" onClick={handleLogOut}>
-          Log Out
-        </button>
+        // <button className="sign-button" onClick={handleSignUp}>
+        //   SignUp
+        // </button>
+        // <button className="sign-button" onClick={handleSignIn}>
+        //   SignIn
+        // </button>
+        // <button className="sign-button" onClick={handleLogOut}>
+        //   Log Out
+        // </button>
       <FaBars
         className={!iconClick ? "bar-icon" : "bar-icon bar-icon-click"}
         onClick={handleBarClick}
