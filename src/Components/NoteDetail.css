@@ -1,0 +1,13 @@
+/* Component:NoteDetail */
+.note-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 30px 30px;
+    padding: 40px;
+    border: 2px solid coral;
+    border-radius: 5px;
+    color: black;
+    animation: fadeIn 1s;
+  }
+  

@@ -3,28 +3,19 @@ import { Link } from "react-router-dom";
 import NoteContext from "../Context/noteContext";
 import { FaRegUserCircle } from "react-icons/fa";
 import Account from "./Account";
+import "./Menu.css";
 
-const Menu = ({ iconClick }) => {
+const Menu = ( ) => {
   const activeUser = useContext(NoteContext);
   const [showUser, setShowUser] = useState(false);
-  const Nav = () => {
+     const Nav = () => {
     return (
-      <nav className="Navbar">
+      <ul className="Menu">
         <li onClick={() => setShowUser(!showUser)}>
-          <span
-            style={{
-              color: "black",
-              display: "flex",
-              justifyContent: "space-evenly",
-              alignItems: "center",
-              fontSize: "20px",
-              fontWeight: "600",
-              cursor: "pointer",
-            }}
-          >
-            <FaRegUserCircle />
-            {activeUser.username}
-          </span>
+          <div className="user-account">
+            <FaRegUserCircle className="user-icon" />
+            <span className="username">{activeUser.username}</span>
+          </div>
           {showUser && <Account />}
         </li>
         <li>
@@ -42,12 +33,12 @@ const Menu = ({ iconClick }) => {
             Contact
           </Link>
         </li>
-      </nav>
+      </ul>
     );
   };
 
   return (
-    <div className="Main-Menu">
+    <div className= "Main-Menu">
       <Nav />
     </div>
   );

@@ -1,0 +1,17 @@
+.home-Note {
+}
+
+.notes-container {
+  align-items: center;
+  padding: 50px;
+  height: 360px;
+}
+/* home */
+.navigate-addnote-btn {
+  margin-top: 50px;
+  border: 2px solid black;
+}
+.navigate-addnote-btn:hover {
+  background-color: black;
+  color: white;
+}

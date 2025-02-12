@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
+import "./Search.css";
 
 const Search = () => {
   const [searchKey, setSearchKey] = useState(null);
@@ -19,7 +20,6 @@ const Search = () => {
         <input
           ref={ref}
           className="search-input"
-          style={{ marginRight: "20px", height: "20px" }}
           placeholder="Search here..."
           maxLength={60}
           value={searchKey}
@@ -29,7 +29,7 @@ const Search = () => {
           }}
         />
       )}
-      <FaSearch onClick={() => HandleSearchButton()} />
+      <FaSearch className="search-icon" onClick={() => HandleSearchButton()} />
     </div>
   );
 };

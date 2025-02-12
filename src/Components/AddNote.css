@@ -1,0 +1,38 @@
+/* Component : AddNote */
+.addNote-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid coral;
+    margin: 0 100px;
+    padding: 40px;
+    border-radius: 5px;
+  }
+  
+  .note-input {
+    width: 75vw;
+    height: 30px;
+    padding: 0px 10px;
+    margin-bottom: 30px;
+  }
+  .note-textarea {
+    width: 75vw;
+    height: 140px;
+    padding: 0px 10px;
+  }
+  
+  .Xbutton {
+    font-size: 12px;
+    padding: 5px 30px;
+    margin: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    transition-duration: 0.5s;
+  }
+  .Xbutton:hover {
+    background-color: black;
+    color: white;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  

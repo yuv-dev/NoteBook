@@ -1,5 +1,6 @@
 import React from "react";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
+import "./Note.css";
 
 const Note = ({
   note,
@@ -7,6 +8,7 @@ const Note = ({
   handleEditNoteClick,
   handleDisplayNoteClick,
 }) => {
+  //Note Text
   const NoteText = () => {
     return (
       <>
@@ -17,7 +19,7 @@ const Note = ({
       </>
     );
   };
-
+  //Button Box
   const ButtonBox = () => {
     return (
       <div className="note-btn-box">
@@ -47,11 +49,10 @@ const Note = ({
           }}
         >
           <FaRegTrashAlt />
-          </button>
+        </button>
       </div>
     );
   };
-
 
   return (
     <div className={"flex-div note-box"}>

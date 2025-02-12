@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import "./Account.css"
 
 const AddNote = ({ handleAddNote }) => {
   const [title, setTitle] = useState("");

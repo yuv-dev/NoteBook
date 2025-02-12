@@ -1,0 +1,68 @@
+/* Navbar css */
+
+.Navbar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0px;
+  transition-duration: 0.4s;
+  align-items: center;
+  padding:10px 50px ;
+}
+
+.Navbar > section {
+  display: flex;
+  justify-content: center;
+}
+.Navbar > section:first-child {
+  display: flex;
+  justify-content: flex-start;
+}
+.Navbar > section:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+.Logo-Box {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  border-radius: 5px;
+  padding-right: 10px;
+}
+.logo-name {
+  color: black;
+  font-size: medium;
+  align-items: baseline;
+  font-weight: 500;
+}
+
+/* Sign  */
+.sign-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.sign-button {
+  margin: 0 5px;
+  color: black;
+  font-size: 16px;
+  padding: 8px 18px;
+  border-radius: 08px;
+  border: 2px solid #d85935;
+}
+.sign-button:hover {
+  background-color: #d85935;
+  color: black;
+}
+
+.bar-icon {
+  transition-duration: 0.5s;
+  margin-left: 20px;
+}
+.bar-icon-click {
+  transform: rotate(90deg);
+}

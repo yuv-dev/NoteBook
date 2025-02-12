@@ -1,31 +1,39 @@
 import "../App.css";
-import { React } from "react";
-import logo from "../logo.svg";
-import Heading from "./Heading";
-import Description from "./Description";
-import { useNavigate } from "react-router-dom";
-import { FaRegStickyNote } from "react-icons/fa";
+import { React, useState } from "react";
+import Home from "./Home";
+import UtilityBar from "./UtilityBar";
+import Navbar from "./Navbar";
+import Menu from "./Menu";
+import "./Layout.css";
+
+// assets
+import logo from "../Assets/logo.webp";
 
 const Layout = () => {
-  const navigate = useNavigate();
+  const [iconClick, setIconClick] = useState(false);
 
-  const handleHomeButton = () => {
-    navigate("/home");
+  const handleBarClick = () => {
+    setIconClick(!iconClick);
   };
-
   return (
-    <div style={{overflow:"hidden"}}>
-      <header className="App-header">
-        <div className="App-heading">
-          <Heading heading="Notebook" />
-          <FaRegStickyNote />
-          <img id="logoImg" src={logo} className="App-logo" alt="logo" />
-        </div>
-        <Description description="Create, View, Store and Update your notes whenever you want" />
-        <button className="btn" onClick={handleHomeButton}>
-          Enter
-        </button>
-      </header>
+    <div className="body">
+      <div className="Header">
+        <Navbar
+          logo={logo}
+          iconClick={iconClick}
+          handleBarClick={handleBarClick}
+        />
+      </div>
+
+      {/* Main body of App */}
+      <div className="core-body">
+        <Home />
+        {iconClick && <Menu />}
+      </div>
+
+      <div className="Footer">
+        <UtilityBar />
+      </div>
     </div>
   );
 };

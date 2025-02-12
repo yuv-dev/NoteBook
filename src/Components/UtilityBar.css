@@ -1,0 +1,39 @@
+.utility-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 50px;
+  height: max-content;
+  padding:0px 50px;
+  /* background-color: #d85935; */
+}
+
+.Home-icon {
+  font-size: 30px;
+  color: black;
+  border-radius: 10px;
+}
+.Home-icon:hover {
+
+  color: #d85935;
+}
+
+.Add-button {
+  font-size: 30px;
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+.Add-button:hover {
+  color: #d85935;
+  animation: rotate 1s infinite;
+}
+
+
+@keyframes rotate {
+  100% {
+    transform: rotate(90deg);
+  }
+  
+}

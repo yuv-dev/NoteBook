@@ -1,17 +1,4 @@
-.home-Note {
-  margin-bottom: 30px;
-}
-.Add-button {
-  font-size: 40px;
-  background-color: transparent;
-  border: none;
-  position: fixed;
-  bottom: 40px;
-  z-index: 99;
-}
-.Add-button:hover {
-  color: coral;
-}
+
 
 .flex-div {
   display: flex;
@@ -26,139 +13,21 @@
   align-items: center;
 }
 
-.Topbar {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  height: fit-content;
-  margin-bottom: 0px;
-  padding: 0;
-  background-color: black;
-  color: white;
-  transition-duration: 0.4s;
-}
-
-.logo {
-  text-decoration: none;
-  color: coral;
-  margin-left: 30px;
-  font-size: 20px;
-}
-.logo:hover {
-  color: white;
-}
 a {
   text-decoration: none;
 }
 
-.bar-icon {
-  transition-duration: 0.5s;
-  margin: 0 30px;
-}
-.bar-icon-click {
-  transform: rotate(90deg);
-}
 .btn {
   padding: 10px 20px;
   border: 1px solid white;
   border-radius: 5px;
 }
 .btn:hover {
-  background-color: coral;
-}
-.notes-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  overflow-y: scroll;
-  /* overflow-x: hidden; */
-  align-items: center;
-  /* border-top: 1px solid coral; */
-  padding: 30px;
-  margin-top: 100px;
-  height: 360px;
-}
-/* home */
-.navigate-addnote-btn {
-  margin-top: 50px;
-  border: 2px solid black;
-}
-.navigate-addnote-btn:hover {
-  background-color: black;
-  color: white;
+  background-color:#d85935;
 }
 
-/* For Component NOtes */
-.note-box {
-  justify-content: space-between;
-  margin: 5px;
-  border-radius: 5px;
-  padding: 15px;
-  font-weight: 500;
-  border: 2px solid coral;
-  text-align: left;
-  width: 60vw;
-  min-height: 55px;
-  transition-duration: 0.5s;
-}
-@media only screen and (max-width: 600px) {
-  .note-box {
-    width: 77vw;
-  }
-  .note-input,
-  .note-textarea {
-    width: 75vw !important;
-  }
-}
-.note-box:hover {
-  background-color: coral;
-  color: white;
-}
 
-.note-text {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.note-change-input {
-  width: 100%;
-}
-
-.note-btn-box {
-  margin-top: 5px;
-}
-.note-btn {
-  padding: 5px 10px;
-  color: black;
-  margin: 0 5px;
-  border: none;
-  border-radius: 5px;
-}
-.note-btn:hover {
-  background-color: black;
-  color: white;
-}
-.note-p {
-  width: inherit;
-  margin: 0px;
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1; /* number of lines to show */
-  line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
 
 /* Component : EditNote */
 .editNote-box {
@@ -181,43 +50,6 @@ a {
   }
 }
 
-/* Component : AddNote */
-.addNote-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid coral;
-  margin: 0 100px;
-  padding: 40px;
-  border-radius: 5px;
-}
-
-.note-input {
-  width: 75vw;
-  height: 30px;
-  padding: 0px 10px;
-  margin-bottom: 30px;
-}
-.note-textarea {
-  width: 75vw;
-  height: 140px;
-  padding: 0px 10px;
-}
-
-.Xbutton {
-  font-size: 12px;
-  padding: 5px 30px;
-  margin: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  transition-duration: 0.5s;
-}
-.Xbutton:hover {
-  background-color: black;
-  color: white;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
 /* Component:NoteDetail */
 .note-detail {
@@ -247,26 +79,6 @@ a {
   overflow-y: auto;
 }
 
-/* Search  */
-.search-box {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex: 1 0 300px;
-  justify-content: end;
-  margin-right: 60px;
-  animation: clip 1s ease-out;
-  transition-duration: 5s;
-  /* margin-right: 90px; */
-}
-.search-input {
-  transition-duration: 1s;
-  animation: clip 0.5s ease-out;
-  min-width: 200px;
-  width: calc(50vw+100px);
-}
-
 @keyframes clip {
   0% {
     clip-path: inset(0 100% 0 100%);
@@ -276,107 +88,11 @@ a {
   }
 }
 
-/* Menu */
-.Main-Menu {
-  position: fixed;
-  right: 25px;
-  top: 55px;
-  background-color: whitesmoke;
-  color: black;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 5px 0px 10px grey;
-  animation: menuclip 0.5s;
-  transition-duration: 1s;
-}
-
-@keyframes menuclip {
-  0% {
-    clip-path: inset(0 0 100% 100%);
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
-  }
-}
 
 .note-textarea {
   height: 200px;
 }
 
-.Navbar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: baseline;
-  list-style-type: none;
-  color: aliceblue;
-}
-
-.Navbar > li {
-  padding: 10px;
-  border-bottom: 1px solid black;
-  min-width: 200px;
-}
-.Navbar > li:last-child {
-  border-bottom: none;
-}
-
-.nav-link {
-  font-size: calc(0.5em + 1vw);
-  padding: 0 calc(10px + 0.5vw);
-  font-family: Arial, Helvetica, sans-serif;
-  color: coral;
-}
-/* .nav-link:last-child{
-  border-bottom: none;
-} */
-.nav-link:hover {
-  color: black;
-}
-
-/* Account */
-.account-menu {
-  overflow: auto;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  padding: 0px;
-  color: black;
-  transition-delay: 0.5s;
-  animation: fadeIn 1s;
-}
-
-.account-list {
-  padding: 5px;
-  font-size: 14px;
-}
-
-.account-btn {
-  padding: 4px 10px;
-  border-radius: 5px;
-  color: coral;
-  font-weight: 600;
-  font-size: calc(0.3em + 1vw);
-  border: 2px solid coral;
-}
-
-/* Sign  */
-.sign-box {
-}
-.sign-button {
-  margin: 0 5px;
-}
-.sign-button:last-child {
-  /* margin:0 10px; */
-}
-
-.utility-bar {
-  display: flex;
-  flex-direction: row;
-  position: fixed;
-  bottom:0;
-  background-color: black;
-  height: 40px;
-  color: white;
-  width: 100vw;
+.hidden{
+  display: none;
 }

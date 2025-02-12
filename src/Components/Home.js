@@ -4,32 +4,8 @@ import Notes from "./Notes";
 import { noteReducer } from "../Context/noteReducer";
 import EditNote from "./EditNote";
 import NoteDetail from "./NoteDetail";
-import { FaPlusCircle } from "react-icons/fa";
-import UtilityBar from "./UtilityBar";
-
-const initialNotes = [
-  {
-    id: 2,
-    title: "Read a Book",
-    description: "Reading a book is good for mind Health",
-    tag: "General",
-    date: new Date(),
-  },
-  {
-    id: 1,
-    title: "Read a Novel",
-    description: "Reading a Novel0 666 is good for mind Health",
-    tag: "General",
-    date: new Date(),
-  },
-  {
-    id: 0,
-    title: "Write a Novel",
-    description: "Express your imagination in the form of a Novel",
-    tag: "General",
-    date: new Date(),
-  },
-];
+import { initialNotes } from "../Data/Notes";
+import "./Home.css";
 
 const Home = () => {
   const nextId = useRef(initialNotes.length);
@@ -120,21 +96,15 @@ const Home = () => {
 
         {displayNoteList && (
           <div className="flex-div notes-container">
-            
-            <h2 style={{position:"fixed", top:"50px"}}>Display Notes</h2>
             <Notes
               notes={notes}
               handleRemoveNote={handleRemoveNote}
               handleEditNoteClick={handleEditNoteClick}
               handleDisplayNoteClick={handleDisplayNoteClick}
             />
-            <button className="Add-button" onClick={handleAddNoteClick}>
-              <FaPlusCircle />
-            </button>
           </div>
         )}
       </div>
-      <UtilityBar />
     </>
   );
 };

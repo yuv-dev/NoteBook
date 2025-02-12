@@ -1,48 +1,67 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./Custom.css";
-import { FaBars, FaHome } from "react-icons/fa";
-import Menu from "./Menu";
+import "./Navbar.css";
+import { FaBars } from "react-icons/fa";
 
-function Navbar({ logo, handleSearchNote }) {
-  const [iconClick, setIconClick] = useState(false);
+function Navbar({ logo, iconClick, handleSearchNote, handleBarClick }) {
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const navigate = useNavigate();
-  const handleBarClick = () => {
-    setIconClick(!iconClick);
-  };
   const handleSignUp = () => {
-    navigate("/signup");
+    setLoggedIn(true);
+    console.log("Sign Up");
+    // navigate("/signup");
   };
   const handleSignIn = () => {
-    navigate("/signin");
+    setLoggedIn(true);
+    console.log("Sign In");
+    // navigate("/signin");
   };
   const handleLogOut = () => {
+    setLoggedIn(false);
+    console.log("Log Out");
+    // navigate("/"); // Redirect to home page
   };
 
   return (
-    <div className={`Topbar`}>
-      <Link to="/">
-        <h1 className="logo">{logo}</h1>
-      </Link>
-      <FaHome onClick={()=> navigate('/home')} />
-        {iconClick && <Menu />}
-      <div className="sign-box">
-        // <button className="sign-button" onClick={handleSignUp}>
-        //   SignUp
-        // </button>
-        // <button className="sign-button" onClick={handleSignIn}>
-        //   SignIn
-        // </button>
-        // <button className="sign-button" onClick={handleLogOut}>
-        //   Log Out
-        // </button>
-      <FaBars
-        className={!iconClick ? "bar-icon" : "bar-icon bar-icon-click"}
-        onClick={handleBarClick}
-      />
-      </div>
+    <div className="Navbar">
+      <section>
+        <Link className="Logo-Box" to="/">
+          <img
+            src={logo}
+            alt="logo"
+            className="logo"
+            width={"30px"}
+            height={"40px"}
+          />
+          <h2 className="logo-name">NoteBook</h2>
+        </Link>
+      </section>
+
+      <section>
+        <div className="sign-box">
+          {!loggedIn && (
+            <>
+              <button className="sign-button" onClick={handleSignUp}>
+                SignUp
+              </button>
+              <button className="sign-button" onClick={handleSignIn}>
+                SignIn
+              </button>
+            </>
+          )}
+          {loggedIn && (
+            <button className="sign-button" onClick={handleLogOut}>
+              Log Out
+            </button>
+          )}
+          <FaBars
+            className={!iconClick ? "bar-icon" : "bar-icon bar-icon-click"}
+            onClick={handleBarClick}
+          />
+        </div>
+      </section>
     </div>
   );
 }
