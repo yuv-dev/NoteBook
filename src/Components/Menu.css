@@ -1,12 +1,18 @@
 /* Menu */
+@media only screen and (max-width: 600px) {
+  .Main-Menu {
+    z-index: 99;
+  }
+}
+
 .Main-Menu {
   background-color: white;
   box-shadow: 5px 0px 10px grey;
   animation: menuclip 0.5s;
   transition-duration: 1s;
   color: black;
-  width: max-content;
-  height: inherit;
+  width: auto;
+  height: auto;
 }
 
 @keyframes menuclip {
@@ -26,7 +32,20 @@
   width: max-content;
   list-style-type: none;
 }
+.Menu > li {
+  width: 200px;
+  text-align: left;
+  padding: 10px;
+  border-bottom: solid 1px gray;
+}
+.Menu > li:last-child {
+  border-bottom: none;
+}
 
+.Menu > li:hover {
+  background-color: #d858352b;
+  border-radius: 5px;
+}
 .user-account {
   display: flex;
   flex-wrap: wrap;
@@ -41,16 +60,6 @@
 .username {
   font-weight: 600;
   font-size: larger;
-}
-.Menu > li {
-  width: 200px;
-  text-align: left;
-  padding: 10px;
-  border-bottom: solid 1px gray;
-}
-.Menu > li:last-child {
-  border-bottom: none;
-  padding-bottom: 0px;
 }
 
 .nav-link {

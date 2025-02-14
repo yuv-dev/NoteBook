@@ -1,11 +1,11 @@
 import React, { useRef, useReducer, useState } from "react";
-import AddNote from "./AddNote";
 import Notes from "./Notes";
 import { noteReducer } from "../Context/noteReducer";
 import EditNote from "./EditNote";
 import NoteDetail from "./NoteDetail";
 import { initialNotes } from "../Data/Notes";
 import "./Home.css";
+import UtilityBar from "./UtilityBar";
 
 const Home = () => {
   const nextId = useRef(initialNotes.length);
@@ -13,6 +13,7 @@ const Home = () => {
   const [isaddingNote, setIsaddingNote] = useState(false);
   const [editingNote, setEditingNote] = useState(-1);
   const [displayNote, setDisplayNote] = useState(-1);
+  const [activeNote, setActiveNote] = useState(-1);
 
   const handleAddNote = (title, description) => {
     handleAddNoteClick();
@@ -48,8 +49,13 @@ const Home = () => {
     setEditingNote(id);
     handleDisplayNoteClick(-1);
   };
+
   const handleDisplayNoteClick = (id) => {
     setDisplayNote(id);
+    let note = notes.find((note) => {
+      return displayNote === note.id;
+    });
+    setActiveNote(note);
   };
 
   const handleChangeDisplayNote = (id, change) => {
@@ -65,22 +71,19 @@ const Home = () => {
   return (
     <>
       <div className="home-Note">
-        {isaddingNote && (
-          <div>
-            <h2>Create a Note </h2>
-            <AddNote handleAddNote={handleAddNote} />
+        {/* Display list of  notes */}
+        {displayNoteList && (
+          <div className="notes-container">
+            <Notes
+              notes={notes}
+              handleRemoveNote={handleRemoveNote}
+              handleEditNoteClick={handleEditNoteClick}
+              handleDisplayNoteClick={handleDisplayNoteClick}
+            />
           </div>
         )}
 
-        {editingNote >= 0 && (
-          <EditNote
-            note={notes.find((note) => {
-              return editingNote === note.id;
-            })}
-            handleNoteChange={handleNoteChange}
-          />
-        )}
-
+        {/* Display a Note */}
         {displayNote >= 0 && (
           <NoteDetail
             total={notes.length}
@@ -94,16 +97,27 @@ const Home = () => {
           />
         )}
 
-        {displayNoteList && (
-          <div className="flex-div notes-container">
-            <Notes
-              notes={notes}
-              handleRemoveNote={handleRemoveNote}
-              handleEditNoteClick={handleEditNoteClick}
-              handleDisplayNoteClick={handleDisplayNoteClick}
-            />
-          </div>
+        {/* Editing Note */}
+        {editingNote >= 0 && (
+          <EditNote
+            note={notes.find((note) => {
+              return editingNote === note.id;
+            })}
+            handleNoteChange={handleNoteChange}
+          />
         )}
+      </div>
+
+      {/* Footer */}
+      <div className="Footer">
+        <UtilityBar
+          handleEditNoteClick={handleEditNoteClick}
+          handleRemoveNote={handleRemoveNote}
+          handleDisplayNoteClick={handleDisplayNoteClick}
+          note={notes.find((note) => {
+            return displayNote === note.id;
+          })}
+        />
       </div>
     </>
   );

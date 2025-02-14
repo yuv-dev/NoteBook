@@ -9,7 +9,7 @@
   margin-bottom: 0px;
   transition-duration: 0.4s;
   align-items: center;
-  padding:10px 50px ;
+  padding:10px 20px ;
 }
 
 .Navbar > section {
@@ -27,6 +27,7 @@
 .Logo-Box {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .logo {

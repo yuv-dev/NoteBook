@@ -1,13 +1,76 @@
 /* Component:NoteDetail */
 .note-detail {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 30px 30px;
-    padding: 40px;
-    border: 2px solid coral;
-    border-radius: 5px;
-    color: black;
-    animation: fadeIn 1s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: black;
+  animation: fadeIn 1s;
+}
+
+/* header elements */
+.note-detail-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  background-color: black;
+  color: white;
+  padding: 0 20px;
+}
+.note-detail-updateTime {
+  font-weight: 600;
+  font-size: small;
+}
+.note-detail-content {
+  text-align: justify;
+  padding: 0 20px;
+}
+
+.note-display-text {
+  height: 100%;
+  font-size: 14px;
+  overflow-y: auto;
+}
+
+.note-display-text {
+  margin-bottom: 5px;
+  font-size: 18px;
+  line-height: 1.9;
+}
+
+@keyframes clip {
+  0% {
+    clip-path: inset(0 100% 0 100%);
   }
-  
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.note-detail-btn-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  padding:10px 50px;
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.utils-btn {
+  margin: 0px 10px;
+  padding:6px 30px;
+  border-radius: 5px;
+  background-color: white;
+  color: black;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+}
+.utils-btn:hover {
+  background-color: #d85935;
+  color: white;
+}

@@ -1,27 +1,18 @@
 import React from "react";
+import "./NoteDetail.css";
 
 const NoteDetail = ({
   total,
   note,
   handleEditNoteClick,
   handleDisplayNoteClick,
-  handleChangeDisplayNote
+  handleChangeDisplayNote,
 }) => {
- 
-
   const ButtonBox = () => {
     return (
-      <div className="note-btn-box">
+      <div className="note-detail-btn-box">
         <button
-          className="Xbutton"
-          onClick={() => {
-            handleChangeDisplayNote(note.id,-1)
-          }}
-        >
-          {"<<"}
-        </button>
-        <button
-          className="Xbutton"
+          className="utils-btn"
           onClick={() => {
             handleDisplayNoteClick(-1);
           }}
@@ -29,20 +20,12 @@ const NoteDetail = ({
           Close
         </button>
         <button
-          className="Xbutton"
+          className="utils-btn"
           onClick={() => {
             handleEditNoteClick(note.id);
           }}
         >
           Edit
-        </button>
-        <button
-          className="Xbutton"
-          onClick={() => {
-            handleChangeDisplayNote(note.id,1)
-          }}
-        >
-          {">>"}
         </button>
       </div>
     );
@@ -50,13 +33,17 @@ const NoteDetail = ({
 
   return (
     <div className="note-detail">
-      <span style={{ fontSize: "14px", textAlign: "left" }}>
-      Last Update: {note.date.toLocaleDateString()}{" "}
-        {note.date.toLocaleTimeString()} 
-      </span>
-      <div>
-        <h5 className="note-display-title">{note.title}</h5>
-        <p className="note-display-title note-display-text">{note.description}</p>
+      {/* Header */}
+      <div className="note-detail-header">
+        <h2 className="note-detail-title">{note.title}</h2>
+        <span className="note-detail-updateTime">
+          Last Update: {note.date.toLocaleDateString()}{" "}
+          {note.date.toLocaleTimeString()}
+        </span>
+      </div>
+      {/* Content */}
+      <div className="note-detail-content">
+        <p className="note-display-text">{note.description}</p>
       </div>
       <ButtonBox />
     </div>

@@ -52,32 +52,6 @@ a {
 
 
 /* Component:NoteDetail */
-.note-detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 30px 30px;
-  padding: 40px;
-  border: 2px solid coral;
-  border-radius: 5px;
-  color: black;
-  animation: fadeIn 1s;
-}
-
-.note-display-title {
-  text-align: left;
-  font-size: 16px;
-  background-color: white;
-  padding: 10px;
-  border-radius: 5px;
-  min-height: 25px;
-  border: 1px solid coral;
-}
-.note-display-text {
-  height: 200px;
-  font-size: 14px;
-  overflow-y: auto;
-}
 
 @keyframes clip {
   0% {

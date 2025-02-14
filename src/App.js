@@ -7,6 +7,7 @@ import Layout from "./Components/Layout";
 import NotFound from "./Components/NotFound";
 import Signup from "./Components/Signup";
 import SignIn from "./Components/SignIn";
+import AddNote from "./Components/AddNote";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/add" element={<AddNote />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </NoteState>

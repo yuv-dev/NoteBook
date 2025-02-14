@@ -8,30 +8,23 @@ const Note = ({
   handleEditNoteClick,
   handleDisplayNoteClick,
 }) => {
+  const handleNoteClick = () => {};
+
   //Note Text
   const NoteText = () => {
     return (
-      <>
+      <div>
         <p className="note-p">{note.title}</p>
         <span style={{ fontSize: "12px" }}>
           {note.date.toLocaleDateString()} {note.date.toLocaleTimeString()}
         </span>
-      </>
+      </div>
     );
   };
   //Button Box
   const ButtonBox = () => {
     return (
       <div className="note-btn-box">
-        <button
-          className="note-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleDisplayNoteClick(note.id);
-          }}
-        >
-          View
-        </button>
         <button
           className="note-btn"
           onClick={(e) => {
@@ -55,7 +48,13 @@ const Note = ({
   };
 
   return (
-    <div className={"flex-div note-box"}>
+    <div
+      className={"note-box"}
+      onClick={(e) => {
+        e.stopPropagation();
+        handleDisplayNoteClick(note.id);
+      }}
+    >
       <NoteText />
       <ButtonBox />
     </div>

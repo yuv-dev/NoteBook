@@ -5,7 +5,7 @@ import "./Custom.css";
 import "./Navbar.css";
 import { FaBars } from "react-icons/fa";
 
-function Navbar({ logo, iconClick, handleSearchNote, handleBarClick }) {
+function Navbar({ logo, iconClick, handleBarClick }) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const handleSignUp = () => {

@@ -1,17 +1,52 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import Search from "./Search";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaPlusCircle, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import "./UtilityBar.css";
 
-const UtilityBar = (handleAddNoteClick) => {
+const UtilityBar = ({
+  handleAddNoteClick,
+  handleEditNoteClick,
+  handleRemoveNote,
+  handleDisplayNoteClick,
+  note,
+}) => {
   const handleSearchNote = () => {};
-  const navigate = useNavigate();
+
+  const ButtonBox = () => {
+    return (
+      <div className="note-btn-box">
+        <button
+          className="Xbutton"
+          onClick={() => {
+            handleDisplayNoteClick(-1);
+          }}
+        >
+          Close
+        </button>
+        <button
+          className="Xbutton"
+          onClick={() => {
+            handleEditNoteClick(note.id);
+          }}
+        >
+          Edit
+        </button>
+      </div>
+    );
+  };
 
   return (
     <div className="utility-bar">
-      <FaPlusCircle className="Add-button" onClick={handleAddNoteClick} />
-      <Search className="Search-icon" handleSearchNote={handleSearchNote} />
+      <section>
+        <FaPlusCircle className="Add-button" onClick={handleAddNoteClick} />
+      </section>
+      {/* Utilities */}
+      <section>
+        {/* <ButtonBox /> */}
+      </section>
+      <section>
+        <Search className="Search-icon" handleSearchNote={handleSearchNote} />
+      </section>
     </div>
   );
 };
