@@ -1,10 +1,11 @@
 import "../App.css";
 import { React, useState } from "react";
-import Home from "./Home";
+import { Outlet } from "react-router-dom";
 import UtilityBar from "./UtilityBar";
 import Navbar from "./Navbar";
 import Menu from "./Menu";
 import "./Layout.css";
+
 
 // assets
 import logo from "../Assets/logo.webp";
@@ -27,7 +28,7 @@ const Layout = () => {
 
       {/* Main body of App */}
       <div className="core-body">
-        <Home />
+        <Outlet />
         {iconClick && <Menu />}
       </div>
 

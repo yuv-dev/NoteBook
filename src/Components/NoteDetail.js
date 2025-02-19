@@ -1,12 +1,12 @@
 import React from "react";
 import "./NoteDetail.css";
+import { FaRegTrashAlt, FaRegEdit, FaTimes } from "react-icons/fa";
 
 const NoteDetail = ({
-  total,
   note,
   handleEditNoteClick,
   handleDisplayNoteClick,
-  handleChangeDisplayNote,
+  handleRemoveNote,
 }) => {
   const ButtonBox = () => {
     return (
@@ -17,7 +17,7 @@ const NoteDetail = ({
             handleDisplayNoteClick(-1);
           }}
         >
-          Close
+          <FaTimes />
         </button>
         <button
           className="utils-btn"
@@ -25,7 +25,16 @@ const NoteDetail = ({
             handleEditNoteClick(note.id);
           }}
         >
-          Edit
+          <FaRegEdit />
+        </button>
+        <button
+          className="utils-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRemoveNote(note.id);
+          }}
+        >
+          <FaRegTrashAlt />
         </button>
       </div>
     );
@@ -34,15 +43,27 @@ const NoteDetail = ({
   return (
     <div className="note-detail">
       {/* Header */}
-      <div className="note-detail-header">
-        <h2 className="note-detail-title">{note.title}</h2>
+      <div className="note-header">
+        <h2
+          className="note-detail-title"
+          onDoubleClickCapture={() => {
+            handleEditNoteClick(note.id);
+          }}
+        >
+          {note.title}
+        </h2>
         <span className="note-detail-updateTime">
           Last Update: {note.date.toLocaleDateString()}{" "}
           {note.date.toLocaleTimeString()}
         </span>
       </div>
       {/* Content */}
-      <div className="note-detail-content">
+      <div
+        className="note-detail-content"
+        onDoubleClickCapture={() => {
+          handleEditNoteClick(note.id);
+        }}
+      >
         <p className="note-display-text">{note.description}</p>
       </div>
       <ButtonBox />

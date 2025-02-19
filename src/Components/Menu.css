@@ -1,7 +1,7 @@
 /* Menu */
 @media only screen and (max-width: 600px) {
   .Main-Menu {
-    z-index: 99;
+    z-index: 7;
   }
 }
 

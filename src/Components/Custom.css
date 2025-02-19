@@ -1,18 +1,4 @@
 
-
-.flex-div {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.flex-div-column {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
 a {
   text-decoration: none;
 }
@@ -26,31 +12,6 @@ a {
   background-color:#d85935;
 }
 
-
-
-
-/* Component : EditNote */
-.editNote-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 30px 30px;
-  padding: 40px;
-  border: 2px solid coral;
-  border-radius: 5px;
-  color: black;
-  animation: fadeIn 1s;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-
 /* Component:NoteDetail */
 
 @keyframes clip {
@@ -62,11 +23,20 @@ a {
   }
 }
 
-
-.note-textarea {
-  height: 200px;
-}
-
 .hidden{
   display: none;
+}
+
+.utils-btn {
+  margin: 0px 10px;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+.utils-btn:hover {
+  background-color: transparent;
+  color: #d85935;
 }

@@ -39,6 +39,8 @@ const Home = () => {
       type: "removed",
       id: id,
     });
+    setDisplayNote(-1);
+    setEditingNote(-1);
   };
 
   const handleAddNoteClick = () => {
@@ -104,6 +106,8 @@ const Home = () => {
               return editingNote === note.id;
             })}
             handleNoteChange={handleNoteChange}
+            handleDisplayNoteClick={handleDisplayNoteClick}
+            handleRemoveNote={handleRemoveNote}
           />
         )}
       </div>

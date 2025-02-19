@@ -8,8 +8,6 @@ const Note = ({
   handleEditNoteClick,
   handleDisplayNoteClick,
 }) => {
-  const handleNoteClick = () => {};
-
   //Note Text
   const NoteText = () => {
     return (

@@ -33,3 +33,16 @@
   color: white;
   cursor: pointer;
 }
+.utils-btn {
+  margin: 0px 10px;
+  background-color: transparent;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+}
+.utils-btn:hover {
+  background-color: transparent;
+  color: #d85935;
+}
+

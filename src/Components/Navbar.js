@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./Custom.css";
@@ -7,6 +7,7 @@ import { FaBars } from "react-icons/fa";
 
 function Navbar({ logo, iconClick, handleBarClick }) {
   const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleSignUp = () => {
     setLoggedIn(true);
@@ -24,10 +25,14 @@ function Navbar({ logo, iconClick, handleBarClick }) {
     // navigate("/"); // Redirect to home page
   };
 
+  const handleLogoClick = () => {
+    navigate("/");
+  };
+
   return (
     <div className="Navbar">
       <section>
-        <Link className="Logo-Box" to="/">
+        <div className="Logo-Box" onClick={handleLogoClick}>
           <img
             src={logo}
             alt="logo"
@@ -36,7 +41,7 @@ function Navbar({ logo, iconClick, handleBarClick }) {
             height={"40px"}
           />
           <h2 className="logo-name">NoteBook</h2>
-        </Link>
+        </div>
       </section>
 
       <section>

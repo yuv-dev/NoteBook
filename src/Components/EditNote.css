@@ -1,21 +1,103 @@
 /* Component : EditNote */
-.editNote-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 30px 30px;
-    padding: 40px;
-    border: 2px solid coral;
-    border-radius: 5px;
-    color: black;
-    animation: fadeIn 1s;
-  }
+.edit-note {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  animation: fadeIn 1s;
+  height: 100%;
+  width: inherit;
+}
 
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* header elements */
+.note-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 0 20px;
+  height: 50px;
+}
+.note-detail-updateTime {
+  font-weight: 600;
+  font-size: small;
+}
+.note-edit-input {
+  width: 300px;
+  height: 30px;
+  border: none;
+}
+
+.note-edit-content {
+  height: 100%;
+  /* padding: 0 20px; */
+}
+.note-edit-textarea {
+  width: 97%;
+  height: auto;
+  min-height: 500px;
+  font-size: 18px;
+  line-height: 1.5;
+  border: 0px;
+  outline: 0px;
+  text-align: justify;
+  padding: 20px;
+  overflow: hidden;
+  resize: none;
+  border-radius: 0px;
+}
+
+@keyframes clip {
+  0% {
+    clip-path: inset(0 100% 0 100%);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.note-detail-btn-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 8px 50px;
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  align-items: center;
+  width: 90%;
+}
+
+/* markdown */
+.Markdown-editorX {
+  background-color: inherit;
+  font-size: 24px !important;
+  line-height: 1.5 !important;
+  color: black;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  font-family: monospace;
+}
+.w-md-editor-content {
+  border-radius: 0px;
+}
+.w-md-editor-toolbar {
+  border-radius: 0px;
+}
+.w-md-editor-text {
+  font-size: 24px !important;
+  line-height: 1.5 !important;
+}

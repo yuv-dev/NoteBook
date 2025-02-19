@@ -1,6 +1,6 @@
 import React from "react";
 import Search from "./Search";
-import { FaPlusCircle, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa";
 import "./UtilityBar.css";
 
 const UtilityBar = ({
@@ -11,29 +11,6 @@ const UtilityBar = ({
   note,
 }) => {
   const handleSearchNote = () => {};
-
-  const ButtonBox = () => {
-    return (
-      <div className="note-btn-box">
-        <button
-          className="Xbutton"
-          onClick={() => {
-            handleDisplayNoteClick(-1);
-          }}
-        >
-          Close
-        </button>
-        <button
-          className="Xbutton"
-          onClick={() => {
-            handleEditNoteClick(note.id);
-          }}
-        >
-          Edit
-        </button>
-      </div>
-    );
-  };
 
   return (
     <div className="utility-bar">
