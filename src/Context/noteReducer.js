@@ -1,5 +1,10 @@
 export function noteReducer(notes, action) {
   switch (action.type) {
+    //initialise notes with fetched data
+    case "initialize":
+      return action.notes;
+
+    //add a new note
     case "added": {
       return [
         {
@@ -11,6 +16,8 @@ export function noteReducer(notes, action) {
         ...notes,
       ];
     }
+
+    //Edit an existing note
     case "changed": {
       return notes.map((note) => {
         if (note.id === action.newNote.id) return action.newNote;
@@ -18,11 +25,12 @@ export function noteReducer(notes, action) {
       });
     }
 
+    //delete a note
     case "removed": {
       return notes.filter((n) => n.id !== action.id);
     }
     default: {
-      throw Error("Unknown Action:" + action.type);
+      return notes;
     }
   }
 }

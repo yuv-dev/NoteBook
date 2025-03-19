@@ -24,17 +24,15 @@
 }
 .note-detail-content {
   text-align: justify;
-  padding: 0 20px;
   margin-top: 50px;
+  background-color: lightyellow;
+  padding: 20px;
+  min-height: 65vh;
 }
 
 .note-display-text {
   height: 100%;
-  font-size: 14px;
   overflow-y: auto;
-}
-
-.note-display-text {
   margin-bottom: 5px;
   font-size: 18px;
   line-height: 1.9;
@@ -49,7 +47,7 @@
   }
 }
 
-.note-detail-btn-box {
+.note-btn-box {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -61,4 +59,5 @@
   z-index: 100;
   align-items: center;
   width: 90%;
+  height: 30px;
 }

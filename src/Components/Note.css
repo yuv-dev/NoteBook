@@ -9,7 +9,7 @@
   border-bottom: 2px solid coral;
   text-align: left;
   width: inherit;
-  min-height: 55px;
+  min-height: 0px;
   transition-duration: 0.5s;
 }
 .note-box:hover{

@@ -10,7 +10,7 @@ const NoteDetail = ({
 }) => {
   const ButtonBox = () => {
     return (
-      <div className="note-detail-btn-box">
+      <div className="note-btn-box">
         <button
           className="utils-btn"
           onClick={() => {
@@ -53,7 +53,7 @@ const NoteDetail = ({
           {note.title}
         </h2>
         <span className="note-detail-updateTime">
-          Last Update: {note.date.toLocaleDateString()}{" "}
+          {note.date.toLocaleDateString()}{" "}
           {note.date.toLocaleTimeString()}
         </span>
       </div>
@@ -64,7 +64,7 @@ const NoteDetail = ({
           handleEditNoteClick(note.id);
         }}
       >
-        <p className="note-display-text">{note.description}</p>
+        <span className="note-display-text">{note.description}</span>
       </div>
       <ButtonBox />
     </div>

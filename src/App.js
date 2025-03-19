@@ -9,6 +9,7 @@ import Signup from "./Components/Signup";
 import SignIn from "./Components/SignIn";
 import AddNote from "./Components/AddNote";
 import Home from "./Components/Home";
+import NoteDetail from "./Components/NoteDetail";
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
               <Route path="/signup" element={<Signup />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/add" element={<AddNote />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/:id" element={<NoteDetail />} />
+               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </NoteState>

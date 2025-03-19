@@ -6,7 +6,6 @@ import Navbar from "./Navbar";
 import Menu from "./Menu";
 import "./Layout.css";
 
-
 // assets
 import logo from "../Assets/logo.webp";
 
@@ -30,10 +29,6 @@ const Layout = () => {
       <div className="core-body">
         <Outlet />
         {iconClick && <Menu />}
-      </div>
-
-      <div className="Footer">
-        <UtilityBar />
       </div>
     </div>
   );

@@ -8,12 +8,11 @@ const Notes = ({
   handleDisplayNoteClick,
 }) => {
 
-
   return (
     <>
       {notes.map((note) => (
         <Note
-          key={note.id}
+          key={note._id}
           note={note}
           handleRemoveNote={handleRemoveNote}
           handleEditNoteClick={handleEditNoteClick}

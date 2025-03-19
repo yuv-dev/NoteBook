@@ -5,16 +5,16 @@ import { FaRegUserCircle } from "react-icons/fa";
 import Account from "./Account";
 import "./Menu.css";
 
-const Menu = ( ) => {
+const Menu = () => {
   const activeUser = useContext(NoteContext);
   const [showUser, setShowUser] = useState(false);
-     const Nav = () => {
+  const Nav = () => {
     return (
       <ul className="Menu">
-        <li onClick={() => setShowUser(!showUser)}>
+        <li onClick={() => setShowUser((prev) => !prev)}>
           <div className="user-account">
             <FaRegUserCircle className="user-icon" />
-            <span className="username">{activeUser.username}</span>
+            <span className="username">{activeUser?.username || "Guest"}</span>
           </div>
           {showUser && <Account />}
         </li>
@@ -38,7 +38,7 @@ const Menu = ( ) => {
   };
 
   return (
-    <div className= "Main-Menu">
+    <div className="Main-Menu">
       <Nav />
     </div>
   );

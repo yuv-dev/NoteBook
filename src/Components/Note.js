@@ -8,12 +8,14 @@ const Note = ({
   handleEditNoteClick,
   handleDisplayNoteClick,
 }) => {
+  // console.log("Note",note)
   //Note Text
   const NoteText = () => {
     return (
       <div>
         <p className="note-p">{note.title}</p>
         <span style={{ fontSize: "12px" }}>
+          
           {note.date.toLocaleDateString()} {note.date.toLocaleTimeString()}
         </span>
       </div>
@@ -22,7 +24,7 @@ const Note = ({
   //Button Box
   const ButtonBox = () => {
     return (
-      <div className="note-btn-box">
+      <div className="notelist-btn-box">
         <button
           className="note-btn"
           onClick={(e) => {

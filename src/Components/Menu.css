@@ -6,13 +6,15 @@
 }
 
 .Main-Menu {
+  position: relative;
   background-color: white;
   box-shadow: 5px 0px 10px grey;
+  z-index: 10;
   animation: menuclip 0.5s;
   transition-duration: 1s;
   color: black;
   width: auto;
-  height: auto;
+  height: inherit
 }
 
 @keyframes menuclip {
@@ -25,18 +27,22 @@
 }
 
 .Menu {
+  position: sticky;
+  top:20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   padding: 10px;
   width: max-content;
   list-style-type: none;
+
 }
 .Menu > li {
   width: 200px;
   text-align: left;
   padding: 10px;
   border-bottom: solid 1px gray;
+  transition: color 0.3s ease-in-out;
+
 }
 .Menu > li:last-child {
   border-bottom: none;

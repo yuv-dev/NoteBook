@@ -6,10 +6,6 @@
   flex-direction: column;
 }
 
-.notes-container {
-  align-items: center;
-  height: 360px;
-}
 /* home */
 .navigate-addnote-btn {
   margin-top: 50px;
@@ -26,6 +22,7 @@
   width: 100%;
   background-color: black;
   position: fixed;
+  min-height: 52px;
   bottom: 0;
-  z-index: 10;
+  z-index: 99;
 }

@@ -27,6 +27,8 @@
   color: white;
   padding: 0 20px;
   height: 50px;
+  box-sizing: border-box;
+
 }
 .note-detail-updateTime {
   font-weight: 600;
@@ -43,11 +45,9 @@
   /* padding: 0 20px; */
 }
 .note-edit-textarea {
-  width: 97%;
-  height: auto;
-  min-height: 500px;
+  width: 100%;
   font-size: 18px;
-  line-height: 1.5;
+  line-height: 1.9;
   border: 0px;
   outline: 0px;
   text-align: justify;
@@ -55,6 +55,10 @@
   overflow: hidden;
   resize: none;
   border-radius: 0px;
+  margin-top: 52px;
+  background-color: inherit; 
+  box-sizing: border-box;
+
 }
 
 @keyframes clip {
@@ -66,7 +70,7 @@
   }
 }
 
-.note-detail-btn-box {
+.note-btn-box {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -78,6 +82,7 @@
   z-index: 100;
   align-items: center;
   width: 90%;
+  height: 30px;
 }
 
 /* markdown */

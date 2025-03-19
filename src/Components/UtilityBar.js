@@ -15,12 +15,10 @@ const UtilityBar = ({
   return (
     <div className="utility-bar">
       <section>
-        <FaPlusCircle className="Add-button" onClick={handleAddNoteClick} />
+        <FaPlusCircle className="Add-button" onClick={() => handleAddNoteClick(1)} />
       </section>
       {/* Utilities */}
-      <section>
-        {/* <ButtonBox /> */}
-      </section>
+      <section>{/* <ButtonBox /> */}</section>
       <section>
         <Search className="Search-icon" handleSearchNote={handleSearchNote} />
       </section>

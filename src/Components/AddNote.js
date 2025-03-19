@@ -1,44 +1,82 @@
-import React, { useState, useRef, useEffect } from "react";
-import "./Account.css"
+import React from "react";
+import { useState, useRef, useEffect } from "react";
+import { FaRegTrashAlt, FaSave } from "react-icons/fa";
+import "./EditNote.css";
 
-const AddNote = ({ handleAddNote }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+const EditNote = ({
+  note,
+  handleNoteChange,
+  handleAddNote,
+  handleDisplayNoteClick,
+}) => {
+  const [title, setTitle] = useState(note.title);
+  const [description, setDescription] = useState(note.description);
   const ref = useRef(null);
-
   useEffect(() => {
     ref.current.focus();
   }, []);
 
+  function textAreaAdjust(element) {
+    element.style.height = "1px";
+    element.style.height = 25 + element.scrollHeight + "px";
+  }
+  const handleNoteDescriptionEditEvent = (e) => {
+    setDescription(e);
+  };
+  const handleNoteTitleEditEvent = (e) => {
+    setTitle(e);
+  };
+
+  const ButtonBox = () => {
+    return (
+      <div className="note-btn-box">
+        {/* Save Button */}
+        <button
+          className="utils-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            console.log("Note Added");
+            handleAddNote(title, description);
+            handleDisplayNoteClick(-1);
+          }}
+        >
+          <FaSave />
+        </button>
+      </div>
+    );
+  };
+
   return (
-    <div className="addNote-box">
-      <input
-        ref={ref}
-        className="note-input"
-        placeholder="Add Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <textarea
-        row="18"
-        className="note-textarea"
-        placeholder="Add Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <button
-        className="btn Xbutton"
-        onClick={() => {
-          setTitle("");
-          setDescription("");
-          handleAddNote(title, description);
-          ref.current.focus();
-        }}
-      >
-        Save
-      </button>
+    <div className="edit-note">
+      {/* Header */}
+      <div className="note-header">
+        <input
+          ref={ref}
+          className="note-edit-input"
+          placeholder="Add Title"
+          value={title}
+          onChange={(e) => handleNoteTitleEditEvent(e.target.value)}
+        />
+        <span className="note-detail-updateTime">
+          {note.id} : Last Update: {note.date.toLocaleDateString()}{" "}
+          {note.date.toLocaleTimeString()}
+        </span>
+      </div>
+      {/* Content */}
+      <div className="note-edit-content">
+        <textarea
+          className="note-edit-textarea"
+          placeholder="Write your notes"
+          value={description}
+          onChange={(e) => handleNoteDescriptionEditEvent(e.target.value)}
+          onKeyUp={() =>
+            textAreaAdjust(document.querySelector(".note-edit-textarea"))
+          }
+        />
+      </div>
+      <ButtonBox />
     </div>
   );
 };
 
-export default AddNote;
+export default EditNote;

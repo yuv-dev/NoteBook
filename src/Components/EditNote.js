@@ -16,28 +16,26 @@ const EditNote = ({
     ref.current.focus();
   }, []);
 
+  function textAreaAdjust(element) {
+    element.style.height = "1px";
+    element.style.height = 25 + element.scrollHeight + "px";
+    element.style.scrollBottom = element.style.scrollHeight;
+  }
   const handleNoteDescriptionEditEvent = (e) => {
-    console.log("key pressed");
     setDescription(e);
-    // handleNoteChange({
-    //   ...note,
-    //   title: title,
-    //   description: description,
-    //   date: new Date(),
-    // });
   };
   const handleNoteTitleEditEvent = (e) => {
-    console.log("key pressed");
     setTitle(e);
   };
 
   const ButtonBox = () => {
     return (
-      <div className="note-detail-btn-box">
+      <div className="note-btn-box">
         {/* Save Button */}
         <button
           className="utils-btn"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             handleNoteChange({
               ...note,
               title: title,
@@ -75,28 +73,20 @@ const EditNote = ({
           onChange={(e) => handleNoteTitleEditEvent(e.target.value)}
         />
         <span className="note-detail-updateTime">
-          Last Update: {note.date.toLocaleDateString()}{" "}
+          {note.date.toLocaleDateString()}{" "} 
           {note.date.toLocaleTimeString()}
         </span>
       </div>
       {/* Content */}
       <div className="note-edit-content">
-        {/* <MDEditor
-        className="Markdown-editorX"
-          value={description}
-          height="100%"
-          onChange={(value, viewUpdate) => setDescription(value)}
-          preview="edit"
-          previewOptions={{
-            disallowedElements: ["style"],
-          }}
-
-        /> */}
         <textarea
           className="note-edit-textarea"
           placeholder="Write your notes"
           value={description}
           onChange={(e) => handleNoteDescriptionEditEvent(e.target.value)}
+          onKeyUp={() =>
+            textAreaAdjust(document.querySelector(".note-edit-textarea"))
+          }
         />
       </div>
       <ButtonBox />
