@@ -3,18 +3,20 @@ import "./NoteDetail.css";
 import { FaRegTrashAlt, FaRegEdit, FaTimes } from "react-icons/fa";
 
 const NoteDetail = ({
-  note,
+  displayNote,
   handleEditNoteClick,
   handleDisplayNoteClick,
   handleRemoveNote,
 }) => {
+  const note = displayNote;
+
   const ButtonBox = () => {
     return (
       <div className="note-btn-box">
         <button
           className="utils-btn"
           onClick={() => {
-            handleDisplayNoteClick(-1);
+            handleDisplayNoteClick(null);
           }}
         >
           <FaTimes />
@@ -22,7 +24,7 @@ const NoteDetail = ({
         <button
           className="utils-btn"
           onClick={() => {
-            handleEditNoteClick(note.id);
+            handleEditNoteClick(note);
           }}
         >
           <FaRegEdit />
@@ -31,7 +33,7 @@ const NoteDetail = ({
           className="utils-btn"
           onClick={(e) => {
             e.stopPropagation();
-            handleRemoveNote(note.id);
+            handleRemoveNote(note._id);
           }}
         >
           <FaRegTrashAlt />
@@ -47,21 +49,20 @@ const NoteDetail = ({
         <h2
           className="note-detail-title"
           onDoubleClickCapture={() => {
-            handleEditNoteClick(note.id);
+            handleEditNoteClick(note);
           }}
         >
           {note.title}
         </h2>
         <span className="note-detail-updateTime">
-          {note.date.toLocaleDateString()}{" "}
-          {note.date.toLocaleTimeString()}
+          {note.updatedAt.slice(0, 10)} {note.updatedAt.slice(11, 19)}
         </span>
       </div>
       {/* Content */}
       <div
         className="note-detail-content"
         onDoubleClickCapture={() => {
-          handleEditNoteClick(note.id);
+          handleEditNoteClick(note);
         }}
       >
         <span className="note-display-text">{note.description}</span>

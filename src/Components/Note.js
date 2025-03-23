@@ -1,62 +1,21 @@
 import React from "react";
-import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import "./Note.css";
 
-const Note = ({
-  note,
-  handleRemoveNote,
-  handleEditNoteClick,
-  handleDisplayNoteClick,
-}) => {
-  // console.log("Note",note)
-  //Note Text
-  const NoteText = () => {
-    return (
-      <div>
-        <p className="note-p">{note.title}</p>
-        <span style={{ fontSize: "12px" }}>
-          
-          {note.date.toLocaleDateString()} {note.date.toLocaleTimeString()}
-        </span>
-      </div>
-    );
-  };
-  //Button Box
-  const ButtonBox = () => {
-    return (
-      <div className="notelist-btn-box">
-        <button
-          className="note-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleEditNoteClick(note.id);
-          }}
-        >
-          <FaRegEdit />
-        </button>
-        <button
-          className="note-btn"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleRemoveNote(note.id);
-          }}
-        >
-          <FaRegTrashAlt />
-        </button>
-      </div>
-    );
-  };
-
+const Note = ({ note, handleDisplayNoteClick }) => {
   return (
     <div
       className={"note-box"}
       onClick={(e) => {
         e.stopPropagation();
-        handleDisplayNoteClick(note.id);
+        handleDisplayNoteClick(note);
       }}
     >
-      <NoteText />
-      <ButtonBox />
+      <div>
+        <p className="note-p">{note.title}</p>
+        <span style={{ fontSize: "12px" }}>
+          {note.updatedAt.slice(0, 10)} {note.updatedAt.slice(11, 19)}
+        </span>
+      </div>
     </div>
   );
 };

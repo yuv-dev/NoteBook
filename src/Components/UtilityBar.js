@@ -3,24 +3,23 @@ import Search from "./Search";
 import { FaPlusCircle } from "react-icons/fa";
 import "./UtilityBar.css";
 
-const UtilityBar = ({
-  handleAddNoteClick,
-  handleEditNoteClick,
-  handleRemoveNote,
-  handleDisplayNoteClick,
-  note,
-}) => {
-  const handleSearchNote = () => {};
-
+const UtilityBar = ({ handleAddNoteClick, searchText, setSearchText }) => {
   return (
     <div className="utility-bar">
       <section>
-        <FaPlusCircle className="Add-button" onClick={() => handleAddNoteClick(1)} />
+        <FaPlusCircle
+          className="Add-button"
+          onClick={() => handleAddNoteClick()}
+        />
       </section>
       {/* Utilities */}
       <section>{/* <ButtonBox /> */}</section>
       <section>
-        <Search className="Search-icon" handleSearchNote={handleSearchNote} />
+        <Search
+          className="Search-icon"
+          searchText={searchText}
+          setSearchText={setSearchText}
+        />
       </section>
     </div>
   );

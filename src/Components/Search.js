@@ -2,30 +2,31 @@ import React, { useState, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./Search.css";
 
-const Search = () => {
-  const [searchKey, setSearchKey] = useState(null);
+const Search = ({searchText,setSearchText}) => {
+  const [searchClick, setSearchClick] = useState(false);
   const ref = useRef(null);
 
   const HandleSearchButton = () => {
-    if (searchKey === null) {
-      setSearchKey("");
+    if (!searchClick) {
+      setSearchClick(true)
       setTimeout(() => ref.current.focus(), 1);
-    } else setSearchKey(null);
-    // handleSearchNote("");
+    } else {
+      setSearchClick(false);
+      setSearchText("")
+    }
   };
 
   return (
     <div className="search-box">
-      {searchKey !== null && (
+      {searchClick && (
         <input
-          ref={ref}
+          ref={ref} 
           className="search-input"
           placeholder="Search here..."
           maxLength={60}
-          value={searchKey}
+          value={searchText}
           onChange={(e) => {
-            setSearchKey(e.target.value);
-            // handleSearchNote(e.target.value);
+            setSearchText(e.target.value);
           }}
         />
       )}

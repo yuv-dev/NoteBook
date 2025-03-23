@@ -6,6 +6,8 @@
   animation: fadeIn 1s;
   height: 100%;
   width: inherit;
+  box-sizing: border-box;
+
 }
 
 @keyframes fadeIn {
@@ -39,26 +41,36 @@
   height: 30px;
   border: none;
 }
-
 .note-edit-content {
-  height: 100%;
-  /* padding: 0 20px; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;               /* Minimum height for better visibility */
+  box-sizing: border-box;           /* Consistent sizing */
+  overflow: hidden;                  /* Prevent scroll overflow issues */
+
 }
+
 .note-edit-textarea {
   width: 100%;
-  font-size: 18px;
-  line-height: 1.9;
-  border: 0px;
-  outline: 0px;
-  text-align: justify;
-  padding: 20px;
-  overflow: hidden;
-  resize: none;
-  border-radius: 0px;
-  margin-top: 52px;
-  background-color: inherit; 
-  box-sizing: border-box;
+  min-height: 80vh;                 /* Minimum height for readability */
+  max-height: 80vh;                  /* Prevent growing beyond viewport */
+  padding: 80px 25px;                     /* Padding for better text visibility */
+  font-size: 18px;                   /* Readable font size */
+  line-height: 1.6;                   /* Better readability */
+  resize: none;                      /* Disable manual resizing */
+  overflow-y: auto;                  /* Vertical scroll when needed */
+  box-sizing: border-box;            /* Proper sizing */
+  transition: all 0.3s ease-in-out;  /* Smooth resizing */
+  background-color: rgb(249, 238, 233);
 
+}
+
+.note-edit-textarea:focus {
+  outline: none;
 }
 
 @keyframes clip {

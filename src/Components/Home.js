@@ -1,89 +1,97 @@
 import React, { useRef, useReducer, useState, useEffect } from "react";
 import Notes from "./Notes";
+import "./Home.css";
 import { noteReducer } from "../Context/noteReducer";
 import EditNote from "./EditNote";
 import AddNote from "./AddNote";
 import NoteDetail from "./NoteDetail";
-import { initialNotes } from "../Data/Notes";
-import "./Home.css";
 import UtilityBar from "./UtilityBar";
-import getNotes from "../api/notes";
-import axios from "axios";
+import useDebounce from "../Hooks/useDebounce";
+import { fetchNotes, addNote, updateNote, deleteNote } from "../api/notesApi";
 
 const Home = () => {
-  const nextId = useRef(initialNotes.length);
-  const [isaddingNote, setIsaddingNote] = useState(-1);
-  const [editingNote, setEditingNote] = useState(-1);
-  const [displayNote, setDisplayNote] = useState(-1);
-  const [activeNote, setActiveNote] = useState(-1);
-  const [nnotes, setNnotes] = useState([]);
-  const [notes, dispatch] = useReducer(noteReducer, initialNotes);
+  const [isaddingNote, setIsaddingNote] = useState(false);
+  const [editingNote, setEditingNote] = useState(null);
+  const [displayNote, setDisplayNote] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchedNotes = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:8080/api/notes/all/"
-  //       );
-  //       setNnotes(response.data.data);
-  //     } catch (error) {
-  //       console.error("Failed to fetch notes", error);
-  //     }
-  //   };
-  //   fetchedNotes();
-  // }, []);
+  const [notes, dispatch] = useReducer(noteReducer, []);
+  const [searchText, setSearchText] = useState("");
+  const [filteredNotes, setFilteredNotes] = useState([]);
+  const debouncedSearch = useDebounce(searchText, 300); // Apply debouncing
 
-  // useEffect(() => {
-  //   dispatch({ type: "initialize", notes: nnotes });
-  // }, [nnotes]);
+  useEffect(() => {
+    const fetchedNotes = async () => {
+      try {
+        const data = await fetchNotes();
+        dispatch({ type: "initialize", notes: data });
+      } catch (error) {
+        console.error("Failed to fetch notes", error);
+      }
+    };
+    fetchedNotes();
+  }, []);
 
-  const handleAddNote = (title, description) => {
+  useEffect(() => {
+    if (debouncedSearch.trim() === "") {
+      setFilteredNotes(notes);
+    } else {
+      const lowercasedSearch = debouncedSearch.toLowerCase();
+      const filtered = notes.filter(
+        (note) =>
+          note.title.toLowerCase().includes(lowercasedSearch) ||
+          note.description.toLowerCase().includes(lowercasedSearch) ||
+          note.tag.toLowerCase().includes(lowercasedSearch)
+      );
+      setFilteredNotes(filtered);
+    }
+  }, [debouncedSearch, notes]);
+
+  const handleAddNote = (newNote) => {
     dispatch({
       type: "added",
-      id: nextId.current++,
-      title: title,
-      description: description,
+      note:newNote 
     });
-    handleAddNoteClick(-1);
+    handleAddNoteClick();
   };
 
-  const handleNoteChange = (newNote) => {
-    dispatch({
-      type: "changed",
-      newNote: newNote,
-    });
-    handleEditNoteClick(-1);
-    handleDisplayNoteClick(newNote.id);
+  //Edit note handler
+  const handleNoteChange = async (updatedNote) => {
+    try {
+      await updateNote(updatedNote._id, updatedNote);
+      dispatch({
+        type: "changed",
+        newNote: updatedNote,
+      });
+    } catch (error) {
+      console.error("Failed to updated note", error);
+    }
   };
 
-  const handleRemoveNote = (id) => {
+  const handleRemoveNote = async (id) => {
+    await deleteNote(id);
     dispatch({
       type: "removed",
       id: id,
     });
-    setDisplayNote(-1);
-    setEditingNote(-1);
+    setDisplayNote(null);
+    setEditingNote(null);
   };
 
-  const handleAddNoteClick = (x) => {
-    setIsaddingNote(x);
+  const handleAddNoteClick = () => {
+    setIsaddingNote(x => !x);
   };
 
-  const handleEditNoteClick = (id) => {
-    setEditingNote(id);
-    handleDisplayNoteClick(-1);
+  const handleEditNoteClick = (note) => {
+    setEditingNote(note);
+    handleDisplayNoteClick(null);
   };
 
-  const handleDisplayNoteClick = (id) => {
-    setDisplayNote(id);
-    const note = notes.find((note) => id === note.id);
-    setActiveNote(note);
+  const handleDisplayNoteClick = (note) => {
+    setDisplayNote(note);
   };
 
   const displayNoteList =
-    isaddingNote === -1 && editingNote === -1 && displayNote === -1;
-
-  // console.log(notes);
+    isaddingNote === false && editingNote === null && displayNote === null;
 
   return (
     <>
@@ -92,21 +100,16 @@ const Home = () => {
         {displayNoteList && (
           <div className="notes-container">
             <Notes
-              notes={notes}
-              handleRemoveNote={handleRemoveNote}
-              handleEditNoteClick={handleEditNoteClick}
+              notes={filteredNotes}
               handleDisplayNoteClick={handleDisplayNoteClick}
             />
           </div>
         )}
 
         {/* Display a Note */}
-        {displayNote >= 0 && (
+        {displayNote && (
           <NoteDetail
-            total={notes.length}
-            note={notes.find((note) => {
-              return displayNote === note.id;
-            })}
+            displayNote={displayNote}
             handleRemoveNote={handleRemoveNote}
             handleEditNoteClick={handleEditNoteClick}
             handleDisplayNoteClick={handleDisplayNoteClick}
@@ -114,27 +117,20 @@ const Home = () => {
         )}
 
         {/* Editing Note */}
-        {editingNote >= 0 && (
+        {editingNote && (
           <EditNote
-            note={notes.find((note) => {
-              return editingNote === note.id;
-            })}
+            editingNote={editingNote}
+            handleEditNoteClick={handleEditNoteClick}
             handleNoteChange={handleNoteChange}
-            handleDisplayNoteClick={handleDisplayNoteClick}
             handleRemoveNote={handleRemoveNote}
           />
         )}
 
         {/* Adding a new note */}
-        {isaddingNote > 0 && (
+        {isaddingNote && (
           <AddNote
-            note={{
-              title: "",
-              description: "",
-              date: new Date(),
-            }}
+            handleAddNoteClick={handleAddNoteClick}
             handleAddNote={handleAddNote}
-            handleNoteChange={handleNoteChange}
             handleDisplayNoteClick={handleDisplayNoteClick}
           />
         )}
@@ -143,13 +139,9 @@ const Home = () => {
       {/* Footer */}
       <div className="Footer">
         <UtilityBar
-          handleEditNoteClick={handleEditNoteClick}
-          handleRemoveNote={handleRemoveNote}
-          handleDisplayNoteClick={handleDisplayNoteClick}
           handleAddNoteClick={handleAddNoteClick}
-          note={notes.find((note) => {
-            return displayNote === note.id;
-          })}
+          searchText={searchText}
+          setSearchText={setSearchText}
         />
       </div>
     </>

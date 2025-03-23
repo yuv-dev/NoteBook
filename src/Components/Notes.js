@@ -14,8 +14,6 @@ const Notes = ({
         <Note
           key={note._id}
           note={note}
-          handleRemoveNote={handleRemoveNote}
-          handleEditNoteClick={handleEditNoteClick}
           handleDisplayNoteClick={handleDisplayNoteClick}
         />
       ))}
