@@ -1,11 +1,19 @@
 import axios from "axios";
 const API_BASE_URL = "http://localhost:8080/api/notes";
+const token = localStorage.getItem("token");
+const user = JSON.parse(localStorage.getItem("user"));
+const config = {
+  headers: {
+    Authorization: token || "",
+  },
+};
 
-//Fetch all Notes
-
+//Fetch Notes
 export const fetchNotes = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/all/`);
+    const API_END_POINT = user?.userType === "ADMIN" ? "/all/" : "/"; //ADMIN has different endpoint to access all notes
+    
+    const response = await axios.get(`${API_BASE_URL}${API_END_POINT}`, config);
     return response.data.data;
   } catch (error) {
     console.error("Failed to fetch notes:", error);
@@ -16,7 +24,7 @@ export const fetchNotes = async () => {
 //  Add a new note
 export const createNote = async (note) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/`, note);
+    const response = await axios.post(`${API_BASE_URL}/`, note, config);
     return response.data;
   } catch (error) {
     console.error("Failed to add note:", error);
@@ -29,7 +37,8 @@ export const updateNote = async (id, updatedNote) => {
   try {
     const response = await axios.put(
       `${API_BASE_URL}/${id}`,
-      updatedNote
+      updatedNote,
+      config
     );
     console.log("editedNote", response.data);
     return response.data;
@@ -39,13 +48,11 @@ export const updateNote = async (id, updatedNote) => {
   }
 };
 
-
 // Delete a note
 export const deleteNote = async (id) => {
-  console.log("Delete API")
   try {
-    const response = await axios.delete(`${API_BASE_URL}/${id}`);
-    console.log(response);
+    const response = await axios.delete(`${API_BASE_URL}/${id}`, config);
+    console.log("deleted",response);
   } catch (error) {
     console.error("Failed to delete note:", error);
     throw error;

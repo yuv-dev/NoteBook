@@ -7,7 +7,7 @@
     padding: 0px;
     color: black;
     transition-delay: 1s;
-    animation: fadeIn 1s;
+    animation: fadeIn 5s;
 
   }
   @keyframes fadeIn {
@@ -18,20 +18,12 @@
       opacity: 1;
     }
   }
-  
-  
-  .account-list {
-    padding: 5px;
-    font-size: 14px;
+  .account-list{
+    list-style-type:dot!important;
+    padding-bottom: 2px;
+    font-weight:600;
+    font-size: 10px;
+    line-height: 16px;
+    padding:4px;
+
   }
-  
-  /* .account-btn {
-    padding: 4px 10px;
-    border-radius: 5px;
-    color: #d85935;
-    font-weight: 600;
-    font-size: calc(0.3em + 1vw);
-    border: 2px solid #d85935;
-  }
-   */
-  

@@ -93,11 +93,13 @@ const AddNote = ({ handleAddNoteClick, handleAddNote }) => {
   const ButtonBox = () => {
     const handleClose = async () => {
       if (debounceTitle || debounceDescription) {
+        console.log("closing");
         await autoSave(); //ensure the latest save before closing
       }
-
-      handleAddNote(createdNote.current); //pass the latest data
-    };
+      console.log(createdNote.current);
+      if(noteCreated.current ) handleAddNote(createdNote.current); //pass the latest data
+      else handleAddNoteClick();
+  };
     return (
       <div className="note-btn-box">
         {/* Close Button */}

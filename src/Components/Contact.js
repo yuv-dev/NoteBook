@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import NoteContext from "../Context/noteContext";
+import AuthContext from "../Context/AuthContext";
 
 const Contact = () => {
-  const user = useContext(NoteContext);
+  const {user} = useContext(AuthContext);
   console.log(user);
 
   return (

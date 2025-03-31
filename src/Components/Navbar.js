@@ -1,38 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import "./Custom.css";
 import "./Navbar.css";
 import { FaBars } from "react-icons/fa";
+import AuthContext from "../Context/AuthContext";
 
 function Navbar({ logo, iconClick, handleBarClick }) {
-  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  const handleSignUp = () => {
-    setLoggedIn(true);
-    console.log("Sign Up");
-    // navigate("/signup");
-  };
-  const handleSignIn = () => {
-    setLoggedIn(true);
-    console.log("Sign In");
-    // navigate("/signin");
-  };
-  const handleLogOut = () => {
-    setLoggedIn(false);
-    console.log("Log Out");
-    // navigate("/"); // Redirect to home page
-  };
-
-  const handleLogoClick = () => {
-    navigate("/");
-  };
+  const { user, logout } = useContext(AuthContext);
+  // if (!user) navigate("/signin");
 
   return (
     <div className="Navbar">
+      {/* Logo section    */}
       <section>
-        <div className="Logo-Box" onClick={handleLogoClick}>
+        <Link to="/" className="Logo-Box">
           <img
             src={logo}
             alt="logo"
@@ -41,26 +24,27 @@ function Navbar({ logo, iconClick, handleBarClick }) {
             height={"40px"}
           />
           <h2 className="logo-name">NoteBook</h2>
-        </div>
+        </Link>
       </section>
 
+      {/* sign box */}
       <section>
         <div className="sign-box">
-          {!loggedIn && (
-            <>
-              <button className="sign-button" onClick={handleSignUp}>
-                SignUp
-              </button>
-              <button className="sign-button" onClick={handleSignIn}>
-                SignIn
-              </button>
-            </>
-          )}
-          {loggedIn && (
-            <button className="sign-button" onClick={handleLogOut}>
+          {user ? (
+            <button className="sign-button" onClick={logout}>
               Log Out
             </button>
+          ) : (
+            <>
+              <Link to="/signup" className="sign-button">
+                SignUp
+              </Link>
+              <Link to="/signin" className="sign-button">
+                SignIn
+              </Link>
+            </>
           )}
+
           <FaBars
             className={!iconClick ? "bar-icon" : "bar-icon bar-icon-click"}
             onClick={handleBarClick}

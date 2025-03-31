@@ -18,7 +18,8 @@ const NotFound = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "80vh",
+        height: "100%",
+        width:"100%"
       }}
     >
       <h2>404 NotFound</h2>

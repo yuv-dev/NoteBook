@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import NoteContext from "../Context/noteContext";
+import AuthContext  from "../Context/AuthContext";
 import { FaRegUserCircle } from "react-icons/fa";
 import Account from "./Account";
 import "./Menu.css";
 
 const Menu = () => {
-  const activeUser = useContext(NoteContext);
+  const {user} = useContext(AuthContext);
   const [showUser, setShowUser] = useState(false);
   const Nav = () => {
     return (
@@ -14,12 +14,13 @@ const Menu = () => {
         <li onClick={() => setShowUser((prev) => !prev)}>
           <div className="user-account">
             <FaRegUserCircle className="user-icon" />
-            <span className="username">{activeUser?.username || "Guest"}</span>
+            <span className="username">{user?.username || "Guest"}</span>
           </div>
-          {showUser && <Account />}
+          {showUser && user && <Account />}
         </li>
+        {/* Main menu List */}
         <li>
-          <Link className="nav-link" to="/home">
+          <Link className="nav-link" to="/">
             Home
           </Link>
         </li>

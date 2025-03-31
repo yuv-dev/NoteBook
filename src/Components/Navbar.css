@@ -28,17 +28,21 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  border:2px solid #d85935;
+  border-left: 0px;
+  border-radius:8px;
+  padding-right: 10px;
 }
 
 .logo {
-  border-radius: 5px;
-  padding-right: 10px;
+  border-radius: 8px 0px 0px 8px;
 }
 .logo-name {
   color: black;
   font-size: medium;
   align-items: baseline;
   font-weight: 500;
+  padding-left: 8px;
 }
 
 /* Sign  */

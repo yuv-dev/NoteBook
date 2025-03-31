@@ -1,4 +1,4 @@
-import React, { useRef, useReducer, useState, useEffect } from "react";
+import React, { useReducer, useState, useEffect, useContext } from "react";
 import Notes from "./Notes";
 import "./Home.css";
 import { noteReducer } from "../Context/noteReducer";
@@ -7,29 +7,42 @@ import AddNote from "./AddNote";
 import NoteDetail from "./NoteDetail";
 import UtilityBar from "./UtilityBar";
 import useDebounce from "../Hooks/useDebounce";
-import { fetchNotes, addNote, updateNote, deleteNote } from "../api/notesApi";
+import { fetchNotes, updateNote, deleteNote } from "../api/notesApi";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../Context/AuthContext";
 
 const Home = () => {
+
   const [isaddingNote, setIsaddingNote] = useState(false);
   const [editingNote, setEditingNote] = useState(null);
   const [displayNote, setDisplayNote] = useState(null);
+
+  const { user, token } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true); //  Loading state
 
   const [notes, dispatch] = useReducer(noteReducer, []);
   const [searchText, setSearchText] = useState("");
   const [filteredNotes, setFilteredNotes] = useState([]);
   const debouncedSearch = useDebounce(searchText, 300); // Apply debouncing
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    const fetchedNotes = async () => {
-      try {
-        const data = await fetchNotes();
-        dispatch({ type: "initialize", notes: data });
-      } catch (error) {
-        console.error("Failed to fetch notes", error);
-      }
-    };
-    fetchedNotes();
-  }, []);
+    console.log("HOme", user);
+    if (!user) navigate("/signin");
+    else {
+      const fetchedNotes = async () => {
+        try {
+          const data = await fetchNotes();
+          handleInitNote(data);
+          // dispatch({ type: "initialize", notes: data });
+        } catch (error) {
+          console.error("Failed to fetch notes", error.response);
+        }
+      };
+      fetchedNotes();
+    }
+  }, [user]);
 
   useEffect(() => {
     if (debouncedSearch.trim() === "") {
@@ -46,10 +59,19 @@ const Home = () => {
     }
   }, [debouncedSearch, notes]);
 
+  //initialise
+  const handleInitNote = (notes) => {
+    dispatch({
+      type: "initialize",
+      notes: notes,
+    });
+  };
+
+  //add new note
   const handleAddNote = (newNote) => {
     dispatch({
       type: "added",
-      note:newNote 
+      note: newNote,
     });
     handleAddNoteClick();
   };
@@ -78,7 +100,7 @@ const Home = () => {
   };
 
   const handleAddNoteClick = () => {
-    setIsaddingNote(x => !x);
+    setIsaddingNote((x) => !x);
   };
 
   const handleEditNoteClick = (note) => {
@@ -92,6 +114,7 @@ const Home = () => {
 
   const displayNoteList =
     isaddingNote === false && editingNote === null && displayNote === null;
+
 
   return (
     <>
@@ -137,13 +160,15 @@ const Home = () => {
       </div>
 
       {/* Footer */}
-      <div className="Footer">
-        <UtilityBar
-          handleAddNoteClick={handleAddNoteClick}
-          searchText={searchText}
-          setSearchText={setSearchText}
-        />
-      </div>
+      {displayNoteList && (
+        <div className="Footer">
+          <UtilityBar
+            handleAddNoteClick={handleAddNoteClick}
+            searchText={searchText}
+            setSearchText={setSearchText}
+          />
+        </div>
+      )}
     </>
   );
 };

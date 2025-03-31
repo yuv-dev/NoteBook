@@ -1,7 +1,6 @@
 import "../App.css";
 import { React, useState } from "react";
 import { Outlet } from "react-router-dom";
-import UtilityBar from "./UtilityBar";
 import Navbar from "./Navbar";
 import Menu from "./Menu";
 import "./Layout.css";
@@ -30,6 +29,7 @@ const Layout = () => {
         <Outlet />
         {iconClick && <Menu />}
       </div>
+      <div className="footer"></div>
     </div>
   );
 };

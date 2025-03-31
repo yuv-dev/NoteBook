@@ -1,23 +1,13 @@
 import React, { useContext } from "react";
-import NoteContext from "../Context/noteContext";
+import AuthContext  from "../Context/AuthContext";
 
 const Account = () => {
-  const activeUser = useContext(NoteContext);
+  const {user} = useContext(AuthContext);
 
-  return (
-    <div>
-      <ul className="account-menu">
-        {Object.keys(activeUser).map(
-          (item, index) =>
-            item !== "username" && (
-              <li className="account-list" key={index}>
-                <span>{activeUser[item]}</span>
-              </li>
-            )
-        )}
-      </ul>
-    </div>
-  );
+  return <div className="account-menu">
+      <h5 className="account-list">{user.name}</h5>
+      <h5 className="account-list">{user.email}</h5>
+  </div>;
 };
 
 export default Account;

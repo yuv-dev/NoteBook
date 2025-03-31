@@ -8,7 +8,9 @@ const NoteDetail = ({
   handleDisplayNoteClick,
   handleRemoveNote,
 }) => {
+  const user = localStorage.getItem("user");
   const note = displayNote;
+  console.log(user);
 
   const ButtonBox = () => {
     return (
@@ -54,6 +56,8 @@ const NoteDetail = ({
         >
           {note.title}
         </h2>
+        <span>| {note.username} |</span>
+
         <span className="note-detail-updateTime">
           {note.updatedAt.slice(0, 10)} {note.updatedAt.slice(11, 19)}
         </span>
