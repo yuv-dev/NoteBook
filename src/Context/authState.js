@@ -22,6 +22,7 @@ const AuthState = ({ children }) => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
+      setToken(token);
     }catch(error){
       console.log("Error in login function", error);
     }

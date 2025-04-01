@@ -11,8 +11,8 @@ import { fetchNotes, updateNote, deleteNote } from "../api/notesApi";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Context/AuthContext";
 
-const Home = () => {
 
+const Home = () => {
   const [isaddingNote, setIsaddingNote] = useState(false);
   const [editingNote, setEditingNote] = useState(null);
   const [displayNote, setDisplayNote] = useState(null);
@@ -26,18 +26,26 @@ const Home = () => {
   const debouncedSearch = useDebounce(searchText, 300); // Apply debouncing
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    console.log("HOme", user);
+    if (user === undefined) return; // Wait for user to be defined
+
+    console.log("HOme>user", user);
+    // console.log("HOme>token", token  );
+
     if (!user) navigate("/signin");
     else {
       const fetchedNotes = async () => {
+        setLoading(true);
         try {
-          const data = await fetchNotes();
-          handleInitNote(data);
-          // dispatch({ type: "initialize", notes: data });
+          const data = await fetchNotes(user);
+          dispatch({
+            type: "initialize",
+            notes: data,
+          });
         } catch (error) {
           console.error("Failed to fetch notes", error.response);
+        } finally {
+          setLoading(false);
         }
       };
       fetchedNotes();
@@ -51,21 +59,13 @@ const Home = () => {
       const lowercasedSearch = debouncedSearch.toLowerCase();
       const filtered = notes.filter(
         (note) =>
-          note.title.toLowerCase().includes(lowercasedSearch) ||
-          note.description.toLowerCase().includes(lowercasedSearch) ||
-          note.tag.toLowerCase().includes(lowercasedSearch)
+          note.title?.toLowerCase().includes(lowercasedSearch) ||
+          note.description?.toLowerCase().includes(lowercasedSearch) ||
+          note.tag?.toLowerCase().includes(lowercasedSearch)
       );
       setFilteredNotes(filtered);
     }
   }, [debouncedSearch, notes]);
-
-  //initialise
-  const handleInitNote = (notes) => {
-    dispatch({
-      type: "initialize",
-      notes: notes,
-    });
-  };
 
   //add new note
   const handleAddNote = (newNote) => {
@@ -86,6 +86,7 @@ const Home = () => {
       });
     } catch (error) {
       console.error("Failed to updated note", error);
+      alert("Failed to update the note. Please try Again!");
     }
   };
 
@@ -115,6 +116,7 @@ const Home = () => {
   const displayNoteList =
     isaddingNote === false && editingNote === null && displayNote === null;
 
+  if (loading) return <div className="Loading-spinner">Loading...</div>;
 
   return (
     <>

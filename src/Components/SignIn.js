@@ -25,7 +25,8 @@ function Signin() {
       const { data, token } = response;
 
       //Use context to store session data
-      console.log("signiN reponse", data);
+      console.log("signin reponse", data);
+      
       login(data, token);
       alert("Signin successful!");
       navigate("/");
