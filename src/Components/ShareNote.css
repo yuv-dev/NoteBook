@@ -1,0 +1,52 @@
+.share-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  position: absolute;
+  bottom: 51px;
+  background-color: #000000;
+  padding: 0px 20px;
+  border-radius: 10px 10px 0px 0px;
+  transition: padding .5s ease-in-out;
+  /* backdrop-filter: blur(10px) saturate(70%); */
+}
+
+.share-container:hover {
+  padding: 0px 35px 0px 35px;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 30px;
+}
+
+.share-buttons button {
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 26px;
+}
+
+.clipboard-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: transparent;
+  font-size: 26px;
+}
+.clipboard-btn:hover {
+  color: #d85935;
+}
+
+.share-btn svg {
+  background-color: transparent;
+  color: white;
+  font-size: 26px;
+}
+
+.share-btn svg:hover {
+  color: #d85935;
+}

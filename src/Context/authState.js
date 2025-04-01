@@ -15,15 +15,14 @@ const AuthState = ({ children }) => {
     }
   }, []);
 
-  const login = (userData, token) => {
-    try{
-
+  const login = (userData, newtoken) => {
+    try {
       // console.log("authState-login", userData, token);
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", newtoken);
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
-      setToken(token);
-    }catch(error){
+      setToken(newtoken);
+    } catch (error) {
       console.log("Error in login function", error);
     }
   };
@@ -32,10 +31,11 @@ const AuthState = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
+    setToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

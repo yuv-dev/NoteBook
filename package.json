@@ -16,6 +16,7 @@
     "react-icons-kit": "^2.0.0",
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
+    "react-share": "^5.2.2",
     "web-vitals": "^4.2.4"
   },
   "scripts": {

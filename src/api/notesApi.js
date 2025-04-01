@@ -1,21 +1,22 @@
 import axios from "axios";
 const API_BASE_URL = "http://localhost:8080/api/notes";
 
-//Fetch Notes
-export const fetchNotes = async (user) => {
+const getAuthConfig = () => {
   const token = localStorage.getItem("token");
-  const config = {
+  return {
     headers: {
       Authorization: token ? `Bearer ${token}` : "",
     },
   };
+};
 
+//Fetch Notes
+export const fetchNotes = async (user) => {
   try {
-    console.log("noteapi>fetchnotes>", user?.userType);
     const API_END_POINT =
       user?.userType === "ADMIN" ? `${API_BASE_URL}/all/` : `${API_BASE_URL}/`; //ADMIN has different endpoint to access all notes
 
-    const response = await axios.get(`${API_END_POINT}`, config);
+    const response = await axios.get(`${API_END_POINT}`, getAuthConfig());
     return response.data.data;
   } catch (error) {
     console.error(
@@ -29,15 +30,12 @@ export const fetchNotes = async (user) => {
 
 //  Add a new note
 export const createNote = async (note) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-
   try {
-    const response = await axios.post(`${API_BASE_URL}/`, note, config);
+    const response = await axios.post(
+      `${API_BASE_URL}/`,
+      note,
+      getAuthConfig()
+    );
     return response.data;
   } catch (error) {
     console.error(
@@ -51,18 +49,11 @@ export const createNote = async (note) => {
 
 // Update an existing note
 export const updateNote = async (id, updatedNote) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-
   try {
     const response = await axios.put(
       `${API_BASE_URL}/${id}`,
       updatedNote,
-      config
+      getAuthConfig()
     );
     console.log("editedNote", response.data);
     return response.data;
@@ -78,15 +69,11 @@ export const updateNote = async (id, updatedNote) => {
 
 // Delete a note
 export const deleteNote = async (id) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-
   try {
-    const response = await axios.delete(`${API_BASE_URL}/${id}`, config);
+    const response = await axios.delete(
+      `${API_BASE_URL}/${id}`,
+      getAuthConfig()
+    );
     console.log("deleted", response);
     return response.data;
   } catch (error) {
