@@ -7,6 +7,7 @@ import {
   FaTelegramPlane,
 } from "react-icons/fa";
 import ShareNote from "./ShareNote";
+import PasswordUnlock from "./PasswordUnlock";
 
 const NoteDetail = ({
   displayNote,
@@ -14,10 +15,17 @@ const NoteDetail = ({
   handleDisplayNoteClick,
   handleRemoveNote,
 }) => {
-  const note = displayNote;
   const [share, setShare] = useState(false);
+  const note = displayNote;
+  const [isLocked, setisLocked] = useState(note.isLock);
 
-  if (!displayNote) return null;
+  if (!displayNote) return null; //If no note is provided
+
+  if (isLocked) {
+    //If note is loacked, then ask password to unloack it
+    return <PasswordUnlock onSuccess={() => setisLocked(false)} />;
+  }
+
   const ButtonBox = () => {
     return (
       <div className="note-btn-box">

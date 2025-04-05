@@ -1,15 +1,11 @@
-import React, { useContext } from "react";
-import AuthContext from "../Context/AuthContext";
+import React from "react";
 
 const Contact = () => {
-  const {user} = useContext(AuthContext);
-  console.log(user);
 
   return (
-    <div>
+    <div style={{padding:"50px"}}>
       <h2>Contact Us</h2>
-      <p>This is a contact page</p>
-      <p>{user.name}</p>
+      <p>Contact with developers for any improvements and suggestions </p>
     </div>
   );
 };

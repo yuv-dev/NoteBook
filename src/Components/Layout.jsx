@@ -1,15 +1,19 @@
 import "../App.css";
-import { React, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { React, useContext, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Menu from "./Menu";
 import "./Layout.css";
+
+import AuthContext from "../Context/AuthContext";
 
 // assets
 import logo from "../Assets/logo.webp";
 
 const Layout = () => {
   const [iconClick, setIconClick] = useState(false);
+
+  const { user } = useContext(AuthContext);
 
   const handleBarClick = () => {
     setIconClick(!iconClick);
@@ -27,9 +31,8 @@ const Layout = () => {
       {/* Main body of App */}
       <div className="core-body">
         <Outlet />
-        {iconClick && <Menu />}
+        {iconClick && <Menu handleBarClick={handleBarClick} />}
       </div>
-      <div className="footer"></div>
     </div>
   );
 };

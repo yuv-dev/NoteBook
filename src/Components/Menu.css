@@ -45,7 +45,10 @@
   padding: 10px;
   border-bottom: solid 1px gray;
   transition: color 0.3s ease-in-out;
-
+  font-size: calc(0.5em + 1vw);
+  color: black !important;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
 }
 .Menu > li:last-child {
   border-bottom: none;

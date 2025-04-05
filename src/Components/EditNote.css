@@ -69,7 +69,7 @@
   overflow-y: auto;                  /* Vertical scroll when needed */
   box-sizing: border-box;            /* Proper sizing */
   transition: all 0.3s ease-in-out;  /* Smooth resizing */
-  background-color: rgb(249, 238, 233);
+  background-color:inherit;
 
 }
 

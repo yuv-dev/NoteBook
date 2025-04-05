@@ -66,3 +66,20 @@
   font-size: 24px;
 }
 
+/* Password Verification box */
+.check-password{
+display: flex;
+height: auto;
+flex-direction: column;
+justify-content: center;
+align-self: center;
+padding: 100px 40px;
+
+}
+
+@media screen and (max-width: 680px) {
+ .check-password {
+  justify-content: center;
+  align-self: center;
+  }
+}

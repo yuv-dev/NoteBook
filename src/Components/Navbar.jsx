@@ -7,10 +7,9 @@ import { FaBars } from "react-icons/fa";
 import AuthContext from "../Context/AuthContext";
 
 function Navbar({ logo, iconClick, handleBarClick }) {
-  const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
   // if (!user) navigate("/signin");
-
+  const navigate = useNavigate();
   return (
     <div className="Navbar">
       {/* Logo section    */}
@@ -31,9 +30,22 @@ function Navbar({ logo, iconClick, handleBarClick }) {
       <section>
         <div className="sign-box">
           {user ? (
-            <button className="sign-button" onClick={logout}>
-              Log Out
-            </button>
+            <>
+              <button
+                className="sign-button"
+                onClick={() => {
+                  logout();
+                  navigate("/signin");
+                }}
+              >
+                Log Out
+              </button>
+
+              <FaBars
+                className={!iconClick ? "bar-icon" : "bar-icon bar-icon-click"}
+                onClick={handleBarClick}
+              />
+            </>
           ) : (
             <>
               <Link to="/signup" className="sign-button">
@@ -44,11 +56,6 @@ function Navbar({ logo, iconClick, handleBarClick }) {
               </Link>
             </>
           )}
-
-          <FaBars
-            className={!iconClick ? "bar-icon" : "bar-icon bar-icon-click"}
-            onClick={handleBarClick}
-          />
         </div>
       </section>
     </div>

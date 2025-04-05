@@ -11,7 +11,7 @@ function Signin() {
 
   const [type, setType] = useState("password");
 
-  const { user, login } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,13 +20,11 @@ function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(form);
       const response = await SignInAPI(form);
       const { data, token } = response;
 
       //Use context to store session data
-      console.log("signin reponse", data);
-      
+
       login(data, token);
       alert("Signin successful!");
       navigate("/");

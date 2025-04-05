@@ -9,14 +9,14 @@
 .core-body {
   display: flex;
   flex-direction: column;
-  margin: 70px 0px 50px 0px;
-  padding: 0;
-  min-height: 80vh;
+  margin: 70px 0px 0px 0px;
+  padding: 0px;
+  min-height: 88vh;
   width: 100%;
   height: auto;
-  background-color: rgb(249, 238, 233);
+  background-color: #f0f0f0;
+  /* background-color: rgb(249, 238, 233); */
   position: relative;
-  /* align-items: center; */
 }
 .Header {
   width: 100%;
@@ -26,5 +26,4 @@
   top: 0;
   z-index: 99;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-
 }

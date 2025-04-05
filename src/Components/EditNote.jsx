@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { FaRegTrashAlt, FaTimes } from "react-icons/fa";
+
+import {
+  FaLock,
+  FaLockOpen,
+  FaRegTrashAlt,
+  FaTelegramPlane,
+  FaTimes,
+} from "react-icons/fa";
+
 import "./EditNote.css";
+//utility Functions
 import useDebounce from "../Hooks/useDebounce";
 import useDebounceCallback from "../Hooks/useDebounceCallback";
+import { textAreaAdjust } from "../Utils/textAreaAdjust";
+//API
 import { updateNote } from "../api/notesApi";
+//Components
+import ShareNote from "./ShareNote";
 
 const EditNote = ({
   editingNote,
@@ -22,65 +36,73 @@ const EditNote = ({
 
   const lastSavedTitle = useRef(note.title);
   const lastSavedDescription = useRef(note.description);
+  const prevIsLock = useRef(note.isLock);
 
   const textAreaRef = useRef(null); // Ref for scrolling
+
+  //Utility states
+  const [share, setShare] = useState(false);
+  const [isLock, setIsLock] = useState(note.isLock);
+  const masterpassword = localStorage.getItem("masterpassword");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (textAreaRef.current) textAreaRef.current.focus();
   }, []);
 
+  const autosave = async () => {
+    try {
+      console.log("autosave triggered");
+      const updatedNote = {
+        ...note,
+        title: debounceTitle,
+        description: debounceDescription,
+        isLock: isLock,
+      };
+      await updateNote(note._id, updatedNote); //Call APi to save updated note
+
+      //update the last save value
+      lastSavedDescription.current = debounceDescription;
+      lastSavedTitle.current = debounceTitle;
+      console.log("Note updated Succesfully");
+      handleNoteChange(updatedNote);
+    } catch (error) {
+      console.log("Failed to autosave note!", error);
+    }
+  };
+
   useEffect(() => {
-    const autosave = async () => {
-      if (
-        debounceTitle !== lastSavedTitle.current ||
-        debounceDescription !== lastSavedDescription.current
-      ) {
-        try {
-          const updatedNote = {
-            ...note,
-            title: debounceTitle,
-            description: debounceDescription,
-          };
-          await updateNote(note._id, updatedNote); //Call APi to save updated note
+    if (
+      debounceTitle !== lastSavedTitle.current ||
+      debounceDescription !== lastSavedDescription.current
+    ) {
+      autosave();
+    }
+  }, [debounceDescription, debounceTitle]);
 
-          //update the last save value
-          lastSavedDescription.current = debounceDescription;
-          lastSavedTitle.current = debounceTitle;
-          console.log("Note updated Succesfully");
-          handleNoteChange(updatedNote);
-        } catch (error) {
-          console.log("Failed to autosave note!", error);
-        }
-      }
-    };
+  //Trigger autosave on isLock state change
+  useEffect(() => {
+    console.log("islOckUefect", isLock);
+    if (prevIsLock.current !== isLock) {
+      prevIsLock.current = isLock;
+      autosave();
+    }
+  }, [isLock]); // Trigger autosave when lock state changes
 
-    autosave();
-  }, [debounceTitle, debounceDescription, note, handleNoteChange]);
-
-  //
   //  Debounced Auto-Resize Logic
   const debouncedResize = useDebounceCallback((element) => {
     textAreaAdjust(element);
   }, 150); // Resizes only after 150ms delay
 
-  const textAreaAdjust = (element) => {
-    if (element) {
-      const scrollPos = element.scrollTop; // Save scroll position
-      const cursorPos = element.selectionStart; // Save cursor position
-
-      const prevHeight = element.style.height;
-      element.style.height = "auto"; // Reset height
-
-      const newHeight = `${element.scrollHeight}px`;
-
-      // Resize only when necessary
-      if (prevHeight !== newHeight) {
-        element.style.height = newHeight;
-      }
-
-      // Restore cursor and scroll position smoothly
-      element.scrollTop = scrollPos;
-      element.setSelectionRange(cursorPos, cursorPos);
+  const handleNoteLock = () => {
+    //Check if master password is present or not
+    if (!masterpassword) {
+      navigate("/setting", { state: { gotoMasterPassword: true } });
+    } else {
+      setIsLock((x) => {
+        console.log("Lock state changed", !x);
+        return !x;
+      });
     }
   };
 
@@ -106,6 +128,29 @@ const EditNote = ({
         >
           <FaRegTrashAlt />
         </button>
+
+        <button
+          className="utils-btn"
+          onClick={() => {
+            setShare((x) => !x);
+          }}
+        >
+          <FaTelegramPlane />
+        </button>
+        <button className="utils-btn" onClick={handleNoteLock}>
+          {!isLock ? <FaLock /> : <FaLockOpen />}
+        </button>
+
+        {/* Share Component */}
+        {share && (
+          <ShareNote
+            note={{
+              ...note,
+              title: lastSavedTitle.current,
+              description: lastSavedDescription.current,
+            }}
+          />
+        )}
       </div>
     );
   };

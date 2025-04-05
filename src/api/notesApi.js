@@ -55,7 +55,7 @@ export const updateNote = async (id, updatedNote) => {
       updatedNote,
       getAuthConfig()
     );
-    console.log("editedNote", response.data);
+    console.log("updatedNoteX", response.data);
     return response.data;
   } catch (error) {
     console.error(

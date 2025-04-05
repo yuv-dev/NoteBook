@@ -122,6 +122,7 @@ const Home = () => {
 
   if (loading) return <div className="Loading-spinner">Loading...</div>;
 
+
   return (
     <>
       <div className="home-Note">

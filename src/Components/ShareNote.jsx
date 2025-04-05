@@ -17,8 +17,10 @@ import {
 import "./ShareNote.css";
 
 const ShareNote = ({ note }) => {
+  console.log(note);
   const shareUrl = `http://localhost:8080/public/note/${note.shareId}`;
   const title = note.title;
+  const description = note.description;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(shareUrl);

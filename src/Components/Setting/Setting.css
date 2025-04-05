@@ -1,0 +1,58 @@
+.setting {
+  display: flex;
+  flex-direction: row;
+  height: 88vh;
+  width: 100%;
+  position: relative;
+}
+.setting-menu {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  border-right: 5px solid orange;
+  color: white;
+  padding: 20px 0px 50px 10px;
+  gap: 20px;
+  font-size: 22px;
+}
+.setting-menu > h3 {
+  padding: 8px 0px;
+  border-bottom: 1px solid white;
+}
+.setting-menu-list {
+  list-style-type: none;
+  padding: 10px 0px 10px 0px;
+}
+.setting-menu-list > li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.setting-menu-list > li:hover {
+    background-color: #f0f0f0;
+
+    color: #333;
+  
+}
+
+.setting-menu-list > li:focus {
+    background-color: #f0f0f0;
+
+  color: #333;
+}
+
+.setting-menu-content {
+  width: 75%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.active-setting-tab {
+  background-color: orange;
+
+  color: black;
+  font-weight: bold;
+  border-radius: 5px 0px 0px 5px;
+}
