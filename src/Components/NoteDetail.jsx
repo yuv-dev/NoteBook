@@ -23,7 +23,21 @@ const NoteDetail = ({
 
   if (isLocked) {
     //If note is loacked, then ask password to unloack it
-    return <PasswordUnlock onSuccess={() => setisLocked(false)} />;
+    return (
+      <>
+        <PasswordUnlock onSuccess={() => setisLocked(false)} />
+        <div className="note-btn-box">
+          <button
+            className="utils-btn"
+            onClick={() => {
+              handleDisplayNoteClick(null);
+            }}
+          >
+            <FaTimes />
+          </button>
+        </div>
+      </>
+    );
   }
 
   const ButtonBox = () => {
